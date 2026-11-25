@@ -1,0 +1,90 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  background: #f4f6fa;
+  color: #1f2733;
+  line-height: 1.55;
+}
+header {
+  background: #1f3a5f;
+  color: #fff;
+  padding: 24px 32px 20px;
+}
+header h1 { margin: 0 0 6px; font-size: 22px; }
+header .sub { margin: 0; opacity: .85; font-size: 13px; }
+main { max-width: 1080px; margin: 24px auto 48px; padding: 0 16px; }
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(20, 40, 70, .08);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.card h2 { margin: 0 0 12px; font-size: 17px; }
+.hint { font-size: 13px; color: #5a6b80; margin: 0 0 14px; }
+.hint code, code { background: #eef2f7; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.meta { margin-top: 12px; font-size: 13px; color: #41536a; }
+.meta b { color: #1f3a5f; }
+
+form { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+button {
+  background: #2563eb; color: #fff; border: 0; border-radius: 6px;
+  padding: 8px 18px; font-size: 14px; cursor: pointer;
+}
+button:hover { background: #1d4ed8; }
+button:disabled { background: #9db4d6; cursor: not-allowed; }
+button.mini { padding: 4px 10px; font-size: 12px; border-radius: 5px; }
+button.choose-warning { background: #b45309; }
+button.choose-retracted { background: #b91c1c; }
+button.choose-normal { background: #475569; }
+button.active { outline: 3px solid rgba(37, 99, 235, .35); }
+
+.toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.counter {
+  background: #fef3c7; color: #92400e; font-weight: 600;
+  padding: 5px 12px; border-radius: 999px; font-size: 13px;
+}
+.counter.full { background: #fee2e2; color: #991b1b; }
+input[type=search], input[type=number], select {
+  border: 1px solid #c8d2df; border-radius: 6px; padding: 7px 10px; font-size: 14px;
+}
+input[type=search] { min-width: 240px; }
+.table-wrap { max-height: 420px; overflow: auto; border: 1px solid #e6ebf2; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #eef1f5; }
+th { background: #f8fafc; position: sticky; top: 0; z-index: 1; }
+td.empty { text-align: center; color: #8595a8; padding: 24px; }
+.tag { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.tag.normal { background: #e2e8f0; color: #334155; }
+.tag.warning { background: #fef3c7; color: #92400e; }
+.tag.retracted { background: #fee2e2; color: #991b1b; }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.sim-form label { font-size: 14px; display: flex; align-items: center; gap: 8px; }
+#sim-status { font-size: 13px; color: #5a6b80; }
+.banner { padding: 12px 16px; border-radius: 8px; margin-bottom: 14px; font-size: 14px; }
+.banner.warn { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+.banner.error { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+.err-detail { font-family: monospace; font-size: 12px; margin-top: 6px; white-space: pre-wrap; }
+
+.result-block { margin-bottom: 18px; }
+.result-block h3 { font-size: 14px; margin: 0 0 8px; color: #1f3a5f; }
+.big-num { font-size: 26px; font-weight: 700; color: #b91c1c; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  background: #eef2ff; border: 1px solid #c7d2fe; color: #3730a3;
+  padding: 3px 10px; border-radius: 999px; font-size: 12px; font-family: monospace;
+}
+.chip.retracted { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.chip.warning { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+ul.cid-list { margin: 6px 0 0; padding-left: 20px; columns: 3; font-size: 13px; }
+.result-meta { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #1f2733; color: #fff; padding: 10px 20px; border-radius: 8px;
+  font-size: 13px; z-index: 10; max-width: 80vw;
+}
+#toast.error { background: #991b1b; }
+#toast.ok { background: #166534; }

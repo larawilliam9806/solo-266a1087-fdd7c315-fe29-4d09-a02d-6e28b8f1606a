@@ -1,0 +1,11 @@
+services:
+  citation-radar:
+    build: .
+    container_name: citation-radar
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+    environment:
+      DB_PATH: /data/app.db
+    restart: unless-stopped

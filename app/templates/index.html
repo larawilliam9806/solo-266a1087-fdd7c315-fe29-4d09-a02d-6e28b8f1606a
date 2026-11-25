@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>撤稿预警 · 引文失据推演</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>撤稿预警 · 综述引文失据推演</h1>
+  <p class="sub">一条结论只需一组完整引文即可成立；组中任一文献撤稿，该组即失效。所有引文组均含撤稿文献时，结论失据。</p>
+</header>
+
+<main>
+  <!-- 数据集 -->
+  <section class="card">
+    <h2>1. 上传数据 CSV</h2>
+    <p class="hint">列要求：<code>结论号</code>、<code>引文组号</code>、<code>DOI</code>（表头也支持英文 conclusion_id / group_id / doi）。重新上传会替换数据，已保存的 DOI 标记予以保留。</p>
+    <form id="upload-form">
+      <input type="file" id="csv-file" accept=".csv,text/csv" required>
+      <button type="submit">上传并替换</button>
+    </form>
+    <div id="dataset-info" class="meta"></div>
+  </section>
+
+  <!-- 标记 -->
+  <section class="card">
+    <h2>2. 文献标记</h2>
+    <div class="toolbar">
+      <span id="warning-counter" class="counter">预警 0 / {{ max_warnings }}</span>
+      <input type="search" id="paper-filter" placeholder="按 DOI 过滤…">
+      <select id="mark-filter">
+        <option value="all">全部状态</option>
+        <option value="warning">仅预警</option>
+        <option value="retracted">仅已撤稿</option>
+        <option value="normal">仅正常</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>DOI</th><th>当前标记</th><th>操作</th></tr>
+        </thead>
+        <tbody id="papers-body">
+          <tr><td colspan="3" class="empty">上传 CSV 后显示文献列表</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 推演 -->
+  <section class="card">
+    <h2>3. 撤稿情景推演</h2>
+    <p class="hint">推演只使用<strong>启动时刻</strong>的标记快照；推演期间仍可修改标记，结果完成后会标注是否已过期。</p>
+    <form id="sim-form" class="sim-form">
+      <label>可能新增撤稿的篇数上限 k：
+        <input type="number" id="k-input" min="0" max="{{ max_warnings }}" value="3">
+      </label>
+      <button type="submit" id="run-btn">开始推演</button>
+      <span id="sim-status"></span>
+    </form>
+  </section>
+
+  <!-- 结果 -->
+  <section class="card" id="result-card" hidden>
+    <h2>4. 推演结果</h2>
+    <div id="stale-banner" class="banner warn" hidden>
+      ⚠ 本结果基于推演启动时的旧标记计算，当前标记或数据已变化，结果<strong>已过期</strong>，仅供参考。
+    </div>
+    <div id="failed-banner" class="banner error" hidden>
+      ✕ 本次推演失败，下方保留的是上一次成功结果（如有）。
+      <div id="failed-error" class="err-detail"></div>
+    </div>
+    <div id="result-body"></div>
+  </section>
+
+  <section class="card" id="live-card" hidden>
+    <h2>当前标记下实时失据结论</h2>
+    <p class="hint">随标记修改实时变化，不经过推演任务。</p>
+    <div id="live-body"></div>
+  </section>
+</main>
+
+<div id="toast" hidden></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
